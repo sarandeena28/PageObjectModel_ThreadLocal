@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Suite">
+  <test thread-count="5" name="Test" verbose="5">
+    <classes>
+    	<class name="testcase.Login"></class>
+        <class name="testcase.Create_NewCase"/>
+		<class name="testcase.EditCase"/>
+		<class name="testcase.DeleteCase"/>
+       	<class name="testcase.Create_New_LegalEntity"/>
+        <class name="testcase.Edit_LegalEntity"/>
+  	    <class name="testcase.verify_LegalEntities_SortByLastModifiedDate"/>
+    </classes>
+  </test> <!-- Test -->
+</suite> <!-- Suite -->
