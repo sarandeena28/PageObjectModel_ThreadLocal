@@ -10,12 +10,17 @@ import pages.LoginPage;
 
 public class DeleteCase extends ProjectSpecificMethods {
 	@BeforeTest
-	public void getSheetName() {
-		sheetName="DeleteCase";
+	public void provideTestDetail() {
+		testcaseName="DeleteCase";
+		testCaseInfo="DeleteCase with Positive Credentials";
+		testCaseCategory="Functional";
+		testcaseAuthor="Saranya";
+//		sheetName="DeleteCase";
+		excelFileName="Delete_case";
 	}
 	@Test(dataProvider="fetchData")
 	public void deleteCase(String Username,String Password) throws IOException {
-		new LoginPage(driver)
+		new LoginPage()
 		.enterUsernam(Username)
 		.enterPassword(Password)
 		.clickLoginButton()

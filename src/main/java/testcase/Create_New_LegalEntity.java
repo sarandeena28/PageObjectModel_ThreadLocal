@@ -11,12 +11,17 @@ import pages.LoginPage;
 public class Create_New_LegalEntity extends ProjectSpecificMethods {
 	
 	@BeforeTest
-	public void getSheetName() {
-		sheetName="Create_New_LegalEntity";
+	public void provideTestDetails() {
+		testcaseName="Create_New_LegalEntity";
+		testCaseInfo="Create_New_LegalEntity with Positive Credentials";
+		testCaseCategory="Functional";
+		testcaseAuthor="Saranya";
+//		sheetName="Create_New_LegalEntity";
+		excelFileName="Create_New_LegalEntity";
 	}
 	@Test(dataProvider="fetchData")
 	public void create_New_LegalEntity(String Username,String Password,String EntityName) throws IOException {
-		new LoginPage(driver)
+		new LoginPage()
 		.enterUsernam(Username)
 		.enterPassword(Password)
 		.clickLoginButton()
@@ -27,8 +32,6 @@ public class Create_New_LegalEntity extends ProjectSpecificMethods {
 		.enterEntityName(EntityName)
 		.clickSave()
 		.verifyLegalEntityName();
-	
-		
 	
 	}
 }

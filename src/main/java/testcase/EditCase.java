@@ -10,12 +10,17 @@ import pages.LoginPage;
 
 public class EditCase extends ProjectSpecificMethods{
 	@BeforeTest
-	public void getSheetName() {
-		sheetName="EditCase";
+	public void provideTestDetail() {
+		testcaseName="EditCase";
+		testCaseInfo="EditCase with Positive Credentials";
+		testCaseCategory="Functional";
+		testcaseAuthor="Saranya";
+//		sheetName="EditCase";
+		excelFileName="Edit_Case";
 	}
 	@Test(dataProvider="fetchData")
 	public void editcase(String Username,String Password) throws InterruptedException, IOException {
-		new LoginPage(driver)
+		new LoginPage()
 		.enterUsernam(Username)
 		.enterPassword(Password)
 		.clickLoginButton()

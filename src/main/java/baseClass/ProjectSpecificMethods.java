@@ -10,6 +10,7 @@ import java.util.concurrent.TimeUnit;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.OutputType;
+import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.interactions.Actions;
@@ -30,14 +31,13 @@ import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 import utils.ReadExcel;
+import wrapperClass.BrowserAndElementImlementation;
 
 
-public class ProjectSpecificMethods {
-	public  ChromeDriver driver;
-	public  ChromeOptions option;
+public class ProjectSpecificMethods extends BrowserAndElementImlementation{
+	
 	public static JavascriptExecutor js;
-	public static String entitynewName;
-	public static WebDriverWait wait;
+	public static String entitynewName;	
 	public static String entityName;
 	public static Actions builder;
 	public static String caseID;
@@ -46,61 +46,25 @@ public class ProjectSpecificMethods {
 	public static String caseNumberToDelete;
 	public static String contactName;
 	public static String sheetName;
+	public  String excelFileName;
 	public static Set<String> windowHandle;
 	public static List<String> windowOpen;
 	public static String newFileName;
 	public static SoftAssert Assert;
 	public static String fileName;
 	public static String file ;
-	public static ExtentHtmlReporter reporter;
-	public static ExtentReports extent;
-	public static ExtentTest testcase;
-	public String testcaseName,testCaseInfo,testCaseCategory,testcaseAuthor;
-	public static ExtentTest node;
-	
 	
 	@DataProvider(name="fetchData")
 	public String[][] sendData() throws IOException {
 		ReadExcel getData=new ReadExcel();
-		String[][] data = getData.readData(sheetName);
+		String[][] data = getData.readData(excelFileName);
 		return data;
 	}
-	@BeforeSuite
-	public void startReport() {
-		reporter=new ExtentHtmlReporter("./reports/result.html");
-		reporter.setAppendExisting(true);
-		extent=new ExtentReports();
-		extent.attachReporter(reporter);
-
-	}
-	@BeforeClass
-	public void testCaseDetails() {
-		testcase = extent.createTest(testcaseName, testCaseInfo);
-		testcase.assignAuthor(testcaseAuthor);
-		testcase.assignCategory(testCaseCategory);
-		
-	}
-	public long takeSnap() throws IOException {
-		long randomNum= (long) (Math.random() * 999999999L);
-		File source = driver.getScreenshotAs(OutputType.FILE);
-		File target=new File("./snaps/img"+ randomNum +".png");
-		FileUtils.copyFile(source, target);
-		return randomNum;
-		
-	}
 	
-	public void reportSteps(String msg,String status) throws IOException {
-		if(status.equalsIgnoreCase("Pass")) {
-			node.pass(msg,MediaEntityBuilder.createScreenCaptureFromPath(".././snaps/img"+takeSnap()+".png").build());
-		}else if(status.equalsIgnoreCase("Fail")) {
-			node.fail(msg,MediaEntityBuilder.createScreenCaptureFromPath(".././snaps/img"+takeSnap()+".png").build());
-		}
-		
-	}
+	
 	@BeforeMethod
 	public void startApp() throws InterruptedException {
-	node = testcase.createNode(testcaseName);
-	WebDriverManager.chromedriver().setup();
+	
 	ChromeOptions option=new ChromeOptions();
 	option.addArguments("--disable-notifications");
 	String downloadFilepath = "C:\\Our Folder\\Maven project\\PageObjectModel_SalesForce\\downloads";
@@ -108,15 +72,12 @@ public class ProjectSpecificMethods {
 	chromePrefs.put("profile.default_content_settings.popups", 0);
 	chromePrefs.put("download.default_directory", downloadFilepath);
 	option.setExperimentalOption("prefs", chromePrefs);
-	driver = new ChromeDriver(option);
-	driver.manage().window().maximize(); 
-	driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-	driver.get("https://login.salesforce.com/");
+	webdriver = startApp("chrome", "https://login.salesforce.com/");
+	node = testcase.createNode(testcaseName);
+	}
+	public void afterMethod() {
+		close();
+	}
 
-	}
 	
-	@AfterSuite
-	public void stopReport() {
-		extent.flush();
-	}
 }

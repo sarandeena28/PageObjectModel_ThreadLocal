@@ -11,12 +11,17 @@ import pages.LoginPage;
 
 public class Edit_LegalEntity extends ProjectSpecificMethods {
 	@BeforeTest
-	public void getSheetName() {
-		sheetName="Edit_LegalEntity";
+	public void provideTestDetail() {
+		testcaseName="Edit_LegalEntity";
+		testCaseInfo="Edit_LegalEntity with Positive Credentials";
+		testCaseCategory="Functional";
+		testcaseAuthor="Saranya";
+//		sheetName="Edit_LegalEntity";
+		excelFileName="Edit_LegalEntity";
 	}
 	@Test(dataProvider="fetchData")
 	public void edit_LegalEntity(String Username,String Password,String SearchByName,String CompanyName,String Description) throws InterruptedException, IOException {
-		new LoginPage(driver)
+		new LoginPage()
 		.enterUsernam(Username)
 		.enterPassword(Password)
 		.clickLoginButton()
