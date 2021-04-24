@@ -10,24 +10,30 @@ import pages.LoginPage;
 
 public class Edit_Order extends ProjectSpecificMethods{
 	@BeforeTest
-	public void  getSheetName(){
-		sheetName="Edit_Order";
+	public void  provideTestDetail(){
+		testcaseName="Edit_Order";
+		testCaseInfo="Edit_Order with Positive Credentials";
+		testCaseCategory="Functional";
+		testcaseAuthor="Saranya";
+//		sheetName="Edit_Order";
+		excelFileName="Edit_Order";
 	}
 	@Test(dataProvider="fetchData")
-	public void edit_Order(String Username,String Password) throws IOException {
-		new LoginPage(driver)
+	public void edit_Order(String Username,String Password,String AccountName) throws IOException {
+		new LoginPage()
 		.enterUsernam(Username)
 		.enterPassword(Password)
 		.clickLoginButton()
 		.clickToggle()
 		.clickViewAll()
 		.click_ServiceConsole()
+		.click_dropdown()
 		.click_orders()
 //		.click_AllOrders()
 		.click_FirstOrder()
 		.click_EditFromdropdown()
 		.remove_AlreadyExistingAccount()
-		.select_AnotherAccountName()
+		.select_AnotherAccountName(AccountName)
 		.clear_RemoveAlreadyExistingContractNumber()
 		.select_AnotherContractNumber()
 		.click_Save();

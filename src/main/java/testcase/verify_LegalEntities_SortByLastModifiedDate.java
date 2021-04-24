@@ -11,13 +11,18 @@ import pages.LoginPage;
 
 public class verify_LegalEntities_SortByLastModifiedDate extends ProjectSpecificMethods {
 	@BeforeTest
-	public void getSheetName() {
-		sheetName="Verify_LegalEntities_SortBy";
+	public void provideTestDetails() {
+		testcaseName="verify_LegalEntities_SortByLastModifiedDate";
+		testCaseInfo="verify_LegalEntities_SortByLastModifiedDate with Positive Credentials";
+		testCaseCategory="Functional";
+		testcaseAuthor="Saranya";
+//		sheetName="Verify_LegalEntities_SortBy";
+		excelFileName="Verify_LegalEntities_SortBy";
 	}
 	
 	@Test(dataProvider="fetchData")
 	public void verify_LegalEntities_AscendingOrder(String Username,String Password) throws InterruptedException, ParseException, IOException {
-		new LoginPage(driver)
+		new LoginPage()
 		.enterUsernam(Username)
 		.enterPassword(Password)
 		.clickLoginButton()

@@ -11,12 +11,17 @@ import pages.LoginPage;
 public class Create_NewCase extends ProjectSpecificMethods {
 	
 	@BeforeTest
-	public void getSheetName() {
-		sheetName="Create_NewCase";
+	public void provideTestDetail() {
+		testcaseName="Create_NewCase";
+		testCaseInfo="Create_NewCase with Positive Credentials";
+		testCaseCategory="Functional";
+		testcaseAuthor="Saranya";
+		excelFileName="Create_NewCase";
+//		sheetName="Create_NewCase";
 	}
 	@Test (dataProvider="fetchData")
 	public void create_NewCase(String Username,String Password,String ContactName,String Subject,String Description) throws InterruptedException, IOException {
-		new LoginPage(driver)
+		new LoginPage()
 		.enterUsernam(Username)
 		.enterPassword(Password)
 		.clickLoginButton()

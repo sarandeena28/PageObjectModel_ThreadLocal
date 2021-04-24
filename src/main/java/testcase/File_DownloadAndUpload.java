@@ -17,11 +17,12 @@ public class File_DownloadAndUpload extends ProjectSpecificMethods{
 		testCaseInfo="File uploading and downloading in positive flow";
 		testCaseCategory="Functional";
 		testcaseAuthor="Saranya";
-		sheetName="File";
+//		sheetName="File";
+		excelFileName="File";
 	}
 	@Test(dataProvider="fetchData")
 	public void file_DownloadAndUpload(String Username,String Password) throws InterruptedException, AWTException, IOException {
-		new LoginPage(driver)
+		new LoginPage()
 		.enterUsernam(Username)
 		.enterPassword(Password)
 		.clickLoginButton()

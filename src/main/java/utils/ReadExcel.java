@@ -8,9 +8,11 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 public class ReadExcel {
 	
-	public String[][] readData(String SheetName) throws IOException {
-		XSSFWorkbook wb=new XSSFWorkbook("./data/caseAndLegalEntity.XLSX");
-		XSSFSheet ws=wb.getSheet(SheetName);
+	public String[][] readData(String fileName) throws IOException {
+//		XSSFWorkbook wb=new XSSFWorkbook("./data/caseAndLegalEntity.xlsx");
+//		XSSFSheet ws=wb.getSheet(SheetName);
+		XSSFWorkbook wb=new XSSFWorkbook("./data/"+fileName+".xlsx");
+		XSSFSheet ws=wb.getSheet("Sheet1");
 		int row = ws.getLastRowNum();
 		short columnNo = ws.getRow(0).getLastCellNum();
 		String[][] data=new String[row][columnNo];

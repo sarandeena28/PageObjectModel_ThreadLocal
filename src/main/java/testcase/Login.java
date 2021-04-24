@@ -17,11 +17,12 @@ public class Login extends ProjectSpecificMethods {
 		testCaseInfo="Login with Positive Credentials";
 		testCaseCategory="Functional";
 		testcaseAuthor="Saranya";
-		sheetName="Login";
+		excelFileName="Login";
+//		sheetName="Login";
 	}
 	@Test(dataProvider="fetchData") 
 	public void login(String Username,String Password) throws IOException {
-		new LoginPage(driver)
+		new LoginPage()
 		.enterUsernam(Username)
 		.enterPassword(Password)
 		.clickLoginButton();
